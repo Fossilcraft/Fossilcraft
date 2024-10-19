@@ -141,15 +141,6 @@ public abstract class DinosaurEntity extends AnimalEntity {
                                 )
                         )
                 );
-
-                player.sendMessage(
-                        Text.literal(
-                                String.format("This %s is %s",
-                                        this.getName().getString(),
-                                        this.getAge().name().toLowerCase()
-                                )
-                        )
-                );
             }
 
             return ActionResult.success(player.getWorld().isClient);
