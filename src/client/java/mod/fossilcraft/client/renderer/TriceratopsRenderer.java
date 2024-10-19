@@ -17,7 +17,12 @@ public class TriceratopsRenderer extends MobEntityRenderer<TriceratopsEntity, Tr
 
     @Override
     public Identifier getTexture(TriceratopsEntity entity) {
-        return Identifier.of(FossilCraft.MODID, "textures/dinosaur/triceratops/" + entity.getMorph().name().toLowerCase() + "_baby.png");
+        return Identifier.of(FossilCraft.MODID,
+                String.format("textures/dinosaur/triceratops/%s_%s.png",
+                        entity.getMorph().name().toLowerCase(),
+                        entity.getAge().toString().toLowerCase()
+                )
+        );
     }
 
     @Override

@@ -1,5 +1,8 @@
 package mod.fossilcraft.entity;
 
+import mod.fossilcraft.entity.shared.Diet;
+import mod.fossilcraft.entity.shared.DinosaurProperties;
+import mod.fossilcraft.entity.shared.Morph;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.world.World;
@@ -18,22 +21,15 @@ public class TriceratopsEntity extends DinosaurEntity {
         this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
-    public float getMinSize() {
-        return 1.2f;
-    }
-
-    public float getMaxSize() {
-        return 7.0f;
-    }
 
     @Override
-    public Morph[] getMorphs() {
-        return TriceratopsMorph.values();
+    protected DinosaurProperties createProperties() {
+        return new DinosaurProperties.Builder()
+                .diet(Diet.HERBIVORE)
+                .size(1.2f, 6.0f)
+                .morphs(TriceratopsMorph.values())
+                .ageStages(3, 10)
+                .build();
     }
 
-
-    @Override
-    public Diet getDietType() {
-        return Diet.HERBIVORE;
-    }
 }

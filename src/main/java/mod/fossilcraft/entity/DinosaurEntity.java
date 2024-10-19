@@ -1,5 +1,9 @@
 package mod.fossilcraft.entity;
 
+import mod.fossilcraft.entity.shared.Age;
+import mod.fossilcraft.entity.shared.Diet;
+import mod.fossilcraft.entity.shared.DinosaurProperties;
+import mod.fossilcraft.entity.shared.Morph;
 import mod.fossilcraft.item.FossilItems;
 import net.minecraft.entity.EntityData;
 import net.minecraft.entity.EntityType;
@@ -16,6 +20,7 @@ import net.minecraft.entity.passive.PassiveEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
@@ -27,47 +32,47 @@ import net.minecraft.world.World;
 
 public abstract class DinosaurEntity extends AnimalEntity {
 
-    public enum Diet {
-        CARNIVORE,
-        HERBIVORE
-    }
-
-    public interface Morph {
-        String name();
-
-        int ordinal();
-    }
+    public static final int TICKS_PER_DAY = 24000;
 
     private static final TrackedData<Integer> MORPH = DataTracker.registerData(DinosaurEntity.class, TrackedDataHandlerRegistry.INTEGER);
-    private static final TrackedData<Float> GROWTH = DataTracker.registerData(DinosaurEntity.class, TrackedDataHandlerRegistry.FLOAT);
+    private static final TrackedData<Integer> TICKS_SINCE_LAST_AGE_UPDATE = DataTracker.registerData(DinosaurEntity.class, TrackedDataHandlerRegistry.INTEGER);
+    private static final TrackedData<Integer> AGE = DataTracker.registerData(DinosaurEntity.class, TrackedDataHandlerRegistry.INTEGER);
+
+    private final DinosaurProperties properties;
 
     protected DinosaurEntity(EntityType<? extends AnimalEntity> entityType, World world) {
         super(entityType, world);
+        this.properties = createProperties();
     }
+
 
     @Override
     public void initDataTracker(DataTracker.Builder builder) {
         super.initDataTracker(builder);
         builder.add(MORPH, 0);
-        builder.add(GROWTH, 0f);
+        builder.add(TICKS_SINCE_LAST_AGE_UPDATE, 0);
+        builder.add(AGE, 0);
     }
 
-    public abstract Morph[] getMorphs();
-
-    public abstract Diet getDietType();
-
-    public abstract float getMinSize();
-
-    public abstract float getMaxSize();
+    protected abstract DinosaurProperties createProperties();
 
     public float getCurrentSize() {
-//        float growth = this.dataTracker.get(GROWTH);
-        float growth = 0.8f;
-        return getMinSize() + (getMaxSize() - getMinSize()) * growth;
+        return this.properties.minSize + (this.properties.maxSize - this.properties.minSize) * 0.3f;
+    }
+
+    public Age getAge() {
+        int age = this.dataTracker.get(AGE);
+        if (age < this.properties.babyAge) {
+            return Age.BABY;
+        } else if (age < this.properties.adultAge) {
+            return Age.JUVENILE;
+        } else {
+            return Age.ADULT;
+        }
     }
 
     public Morph getMorph() {
-        return getMorphs()[this.dataTracker.get(MORPH)];
+        return this.properties.morphs[this.dataTracker.get(MORPH)];
     }
 
     public void setMorph(Morph morph) {
@@ -75,16 +80,48 @@ public abstract class DinosaurEntity extends AnimalEntity {
     }
 
     public void setRandomMorph(Random random) {
-        Morph[] morphs = getMorphs();
-        setMorph(morphs[random.nextInt(morphs.length)]);
+        setMorph(this.properties.morphs[random.nextInt(this.properties.morphs.length)]);
     }
 
     public boolean isCarnivore() {
-        return getDietType() == Diet.HERBIVORE;
+        return this.properties.diet == Diet.CARNIVORE;
     }
 
     public boolean isHerbivore() {
-        return getDietType() == Diet.CARNIVORE;
+        return this.properties.diet == Diet.HERBIVORE;
+    }
+
+    @Override
+    public void writeCustomDataToNbt(NbtCompound nbt) {
+        super.writeCustomDataToNbt(nbt);
+        nbt.putInt("morph", this.dataTracker.get(MORPH));
+        nbt.putInt("age", this.dataTracker.get(AGE));
+        nbt.putInt("ticksSinceLastAgeUpdate", this.dataTracker.get(TICKS_SINCE_LAST_AGE_UPDATE));
+    }
+
+    @Override
+    public void readCustomDataFromNbt(NbtCompound nbt) {
+        super.readCustomDataFromNbt(nbt);
+        this.dataTracker.set(MORPH, nbt.getInt("morph"));
+        this.dataTracker.set(AGE, nbt.getInt("age"));
+        this.dataTracker.set(TICKS_SINCE_LAST_AGE_UPDATE, nbt.getInt("ticksSinceLastAgeUpdate"));
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        int ticksSinceLastAgeUpdate = this.dataTracker.get(TICKS_SINCE_LAST_AGE_UPDATE);
+
+        this.dataTracker.set(TICKS_SINCE_LAST_AGE_UPDATE, ticksSinceLastAgeUpdate + 1);
+
+        if (!this.getWorld().isClient) {
+            int age = this.dataTracker.get(AGE);
+            if (ticksSinceLastAgeUpdate > TICKS_PER_DAY) {
+                this.dataTracker.set(AGE, age + 1);
+                this.dataTracker.set(TICKS_SINCE_LAST_AGE_UPDATE, 0);
+            }
+        }
     }
 
     @Override
@@ -94,14 +131,35 @@ public abstract class DinosaurEntity extends AnimalEntity {
 
         if (item == FossilItems.DINOPEDIA) {
             if (!player.getWorld().isClient) {
+                int age = this.dataTracker.get(AGE);
+
                 player.sendMessage(
                         Text.literal(
-                                String.format("This %s is %s day old",
+                                String.format("This %s is %s days old",
                                         this.getName().getString(),
-                                        this.age
+                                        age
                                 )
                         )
                 );
+
+                player.sendMessage(
+                        Text.literal(
+                                String.format("This %s is %s",
+                                        this.getName().getString(),
+                                        this.getAge().name().toLowerCase()
+                                )
+                        )
+                );
+            }
+
+            return ActionResult.success(player.getWorld().isClient);
+        }
+
+        if (item == FossilItems.CHICKEN_ESSENCE) {
+            if (!player.getWorld().isClient) {
+                int age = this.dataTracker.get(AGE);
+                this.dataTracker.set(AGE, age + 1);
+                itemStack.decrement(1);
             }
 
             return ActionResult.success(player.getWorld().isClient);
@@ -114,11 +172,11 @@ public abstract class DinosaurEntity extends AnimalEntity {
     public EntityData initialize(ServerWorldAccess world, LocalDifficulty difficulty, SpawnReason reason, EntityData entityData) {
         EntityData data = super.initialize(world, difficulty, reason, entityData);
         this.setRandomMorph(world.getRandom());
+        this.setupGoals();
         return data;
     }
 
-    @Override
-    protected void initGoals() {
+    protected void setupGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
         this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));

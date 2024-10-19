@@ -15,8 +15,11 @@ import net.minecraft.resource.featuretoggle.FeatureSet;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.util.Identifier;
 
+import java.util.logging.Logger;
+
 public class FossilCraft implements ModInitializer {
 
+    public static final Logger LOGGER = Logger.getLogger("FossilCraft");
     public static final String MODID = "fossilcraft";
 
     public static final EntityType<TriceratopsEntity> Triceratops = Registry.register(
