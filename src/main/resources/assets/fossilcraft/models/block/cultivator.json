@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "particle": "fossilcraft:block/cultivator_top",
+    "north": "fossilcraft:block/cultivator_side_idle",
+    "south": "fossilcraft:block/cultivator_side_idle",
+    "east": "fossilcraft:block/cultivator_side_idle",
+    "west": "fossilcraft:block/cultivator_side_idle",
+    "up": "fossilcraft:block/cultivator_top",
+    "down": "fossilcraft:block/cultivator_bottom"
+  }
+}

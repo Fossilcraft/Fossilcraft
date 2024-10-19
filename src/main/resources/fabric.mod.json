@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "id": "fossilcraft",
+  "version": "${version}",
+  "name": "Fossilcraft",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "CC BY 4.0",
+  "icon": "assets/fossilcraft/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": ["mod.fossilcraft.client.FossilCraftClient"],
+    "main": ["mod.fossilcraft.FossilCraft"]
+  },
+  "mixins": [
+    "fossilcraft.mixins.json",
+    {
+      "config": "fossilcraft.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
