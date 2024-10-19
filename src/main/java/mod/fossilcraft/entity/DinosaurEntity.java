@@ -25,6 +25,7 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.math.Box;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.world.LocalDifficulty;
 import net.minecraft.world.ServerWorldAccess;
@@ -57,6 +58,10 @@ public abstract class DinosaurEntity extends AnimalEntity {
     protected abstract DinosaurProperties createProperties();
 
     public float getCurrentSize() {
+        if (this.properties == null) {
+            return 1.0f; // Default size if properties are not initialized
+        }
+
         float scaledSize = (float) this.dataTracker.get(AGE) / this.properties.adultAge;
         return Math.min(this.properties.minSize + (this.properties.maxSize - this.properties.minSize) * scaledSize, this.properties.maxSize);
     }
@@ -152,6 +157,7 @@ public abstract class DinosaurEntity extends AnimalEntity {
                 int age = this.dataTracker.get(AGE);
                 this.dataTracker.set(AGE, age + 1);
                 itemStack.decrement(1);
+                this.updateHitbox();
             }
 
             return ActionResult.success(player.getWorld().isClient);
@@ -180,6 +186,26 @@ public abstract class DinosaurEntity extends AnimalEntity {
             this.goalSelector.add(3, new EatGrassGoal(this));
         }
 
+    }
+
+    @Override
+    protected Box calculateBoundingBox() {
+        float size = getCurrentSize();
+        float width = 0.75f * size;
+        float height = 0.75f * size;
+
+        return new Box(
+                this.getX() - width / 2.0,
+                this.getY(),
+                this.getZ() - width / 2.0,
+                this.getX() + width / 2.0,
+                this.getY() + height,
+                this.getZ() + width / 2.0
+        );
+    }
+
+    public void updateHitbox() {
+        this.calculateBoundingBox();
     }
 
     @Override
