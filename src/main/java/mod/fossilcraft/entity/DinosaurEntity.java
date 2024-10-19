@@ -57,7 +57,8 @@ public abstract class DinosaurEntity extends AnimalEntity {
     protected abstract DinosaurProperties createProperties();
 
     public float getCurrentSize() {
-        return this.properties.minSize + (this.properties.maxSize - this.properties.minSize) * 0.3f;
+        float scaledSize = (float) this.dataTracker.get(AGE) / this.properties.adultAge;
+        return Math.min(this.properties.minSize + (this.properties.maxSize - this.properties.minSize) * scaledSize, this.properties.maxSize);
     }
 
     public Age getAge() {
@@ -170,14 +171,15 @@ public abstract class DinosaurEntity extends AnimalEntity {
     protected void setupGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
+        this.goalSelector.add(1, new LookAroundGoal(this));
         this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
 
-        this.goalSelector.add(1, new WanderAroundFarGoal(this, 0.8D));
-        this.goalSelector.add(2, new LookAroundGoal(this));
+        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.8D));
 
         if (this.isHerbivore()) {
             this.goalSelector.add(3, new EatGrassGoal(this));
         }
+
     }
 
     @Override
