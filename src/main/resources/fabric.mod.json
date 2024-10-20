@@ -10,8 +10,12 @@
   "icon": "assets/fossilcraft/icon.png",
   "environment": "*",
   "entrypoints": {
-    "client": ["mod.fossilcraft.client.FossilCraftClient"],
-    "main": ["mod.fossilcraft.FossilCraft"]
+    "client": [
+      "mod.fossilcraft.client.FossilCraftClient"
+    ],
+    "main": [
+      "mod.fossilcraft.FossilCraft"
+    ]
   },
   "mixins": [
     "fossilcraft.mixins.json",

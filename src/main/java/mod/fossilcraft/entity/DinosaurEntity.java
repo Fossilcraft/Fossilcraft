@@ -177,13 +177,14 @@ public abstract class DinosaurEntity extends AnimalEntity {
     protected void setupGoals() {
         this.goalSelector.add(0, new SwimGoal(this));
 
-        this.goalSelector.add(1, new LookAroundGoal(this));
-        this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
+        this.goalSelector.add(1, new WanderAroundFarGoal(this, 1.2D));
 
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 0.8D));
+        this.goalSelector.add(2, new LookAtEntityGoal(this, PlayerEntity.class, 8.0f));
+        this.goalSelector.add(3, new LookAroundGoal(this));
+
 
         if (this.isHerbivore()) {
-            this.goalSelector.add(3, new EatGrassGoal(this));
+            this.goalSelector.add(4, new EatGrassGoal(this));
         }
 
     }

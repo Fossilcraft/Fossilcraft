@@ -30,6 +30,7 @@ public class FossilCraft implements ModInitializer {
 
     public static final ScreenHandlerType<CultivatorScreenHandler> CULTIVATOR_SCREEN_HANDLER = Registry.register(Registries.SCREEN_HANDLER, Identifier.of(MODID, "cultivator"), new ScreenHandlerType<>(CultivatorScreenHandler::new, FeatureSet.empty()));
 
+
     @Override
     public void onInitialize() {
         FabricDefaultAttributeRegistry.register(Triceratops, TriceratopsEntity.createDinosaurAttributes());

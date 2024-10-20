@@ -4,7 +4,6 @@ import mod.fossilcraft.entity.shared.Diet;
 import mod.fossilcraft.entity.shared.DinosaurProperties;
 import mod.fossilcraft.entity.shared.Morph;
 import net.minecraft.entity.EntityType;
-import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.world.World;
 
 public class TriceratopsEntity extends DinosaurEntity {
@@ -17,8 +16,6 @@ public class TriceratopsEntity extends DinosaurEntity {
 
     public TriceratopsEntity(EntityType<? extends TriceratopsEntity> entityType, World world) {
         super(entityType, world);
-
-        this.getAttributeInstance(EntityAttributes.GENERIC_MOVEMENT_SPEED).setBaseValue(0.25D);
     }
 
 

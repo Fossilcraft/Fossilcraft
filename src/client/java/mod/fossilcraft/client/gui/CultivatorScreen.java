@@ -28,6 +28,15 @@ public class CultivatorScreen extends HandledScreen<CultivatorScreenHandler> {
         int x = (width - backgroundWidth) / 2;
         int y = (height - backgroundHeight) / 2;
         context.drawTexture(TEXTURE, x, y, 0, 0, backgroundWidth, backgroundHeight);
+
+        if (handler.isBurning()) {
+            int burnProgress = handler.getFuelProgress();
+            context.drawTexture(TEXTURE, x + 82, y + 36 + 12 - burnProgress, 176, 12 - burnProgress, 14, burnProgress + 2);
+        }
+        
+        // Draw the cooking progress bar
+        int cookProgress = handler.getCookProgress();
+        context.drawTexture(TEXTURE, x + 79, y + 18, 176, 14, cookProgress + 1, 16);
     }
 
     @Override
