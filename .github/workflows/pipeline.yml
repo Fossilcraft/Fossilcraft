@@ -1,0 +1,25 @@
+name: Build & Release
+
+on: 
+  push:
+    branches:
+      - main
+
+jobs:
+  check-version:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Fetch the last two commits to check version changes
+
+      - name: Check version
+        run: |
+          VERSION_LINE=$(git diff HEAD^ HEAD -- gradle.properties | grep '^+[[:space:]]*version=' || true)
+          if [[ -n "$VERSION_LINE" ]]; then
+            echo "✅ Version changed: $VERSION_LINE"
+          else
+            echo "❌ Version not changed."
+            exit 1
+          fi
