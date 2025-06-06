@@ -1,0 +1,12 @@
+{
+    "parent": "block/cube",
+    "textures": {
+        "particle": "fossilcraft:block/analyser_side",
+        "up": "fossilcraft:block/analyser_top_bottom",
+        "down": "fossilcraft:block/analyser_top_bottom",
+        "north": "fossilcraft:block/analyser_front_idle",
+        "south": "fossilcraft:block/analyser_side",
+        "west": "fossilcraft:block/analyser_side",
+        "east": "fossilcraft:block/analyser_side"
+    }
+}

@@ -1,5 +1,8 @@
 {
     "item.fossilcraft.triceratops_dna": "Triceratops DNA",
     "item.fossilcraft.triceratops_egg": "Triceratops Egg",
-    "entity.fossilcraft.triceratops": "Triceratops"
+    "entity.fossilcraft.triceratops": "Triceratops",
+    "block.fossilcraft.analyser": "Analyser",
+    "block.fossilcraft.fossil": "Fossil",
+    "item.fossilcraft.bio_fossil": "Bio-Fossil"
 }

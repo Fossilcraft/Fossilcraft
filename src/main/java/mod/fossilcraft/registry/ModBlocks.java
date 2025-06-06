@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.function.Function;
 
 import mod.fossilcraft.FossilCraftMod;
+import mod.fossilcraft.block.AnalyserBlock;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -21,6 +22,11 @@ public final class ModBlocks {
             "fossil",
             Block::new,
             AbstractBlock.Settings.copy(Blocks.STONE));
+
+    public static final Block ANALYSER = register(
+            "analyser",
+            AnalyserBlock::new,
+            AbstractBlock.Settings.copy(Blocks.IRON_BLOCK));
 
     private static Block register(
             String path,

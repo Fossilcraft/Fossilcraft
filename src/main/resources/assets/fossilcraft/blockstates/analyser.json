@@ -1,0 +1,23 @@
+{
+    "variants": {
+        "facing=north": {
+            "model": "fossilcraft:block/analyser",
+            "uvlock": true
+        },
+        "facing=south": {
+            "model": "fossilcraft:block/analyser",
+            "y": 180,
+            "uvlock": true
+        },
+        "facing=west": {
+            "model": "fossilcraft:block/analyser",
+            "y": 270,
+            "uvlock": true
+        },
+        "facing=east": {
+            "model": "fossilcraft:block/analyser",
+            "y": 90,
+            "uvlock": true
+        }
+    }
+}

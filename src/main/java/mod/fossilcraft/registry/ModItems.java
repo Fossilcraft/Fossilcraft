@@ -12,6 +12,8 @@ import net.minecraft.util.Identifier;
 
 public final class ModItems {
 
+    public static final Item BIO_FOSSIL = register("bio_fossil");
+
     public static void registerDinosaurItems() {
         for (Dinosaur d : DinosaurRegistry.all().values()) {
 

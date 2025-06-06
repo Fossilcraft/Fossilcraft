@@ -14,5 +14,4 @@ public class DinosaurRenderer<R extends LivingEntityRenderState & GeoRenderState
         super(ctx, new DinosaurModel(dinosaurId));
         this.shadowRadius = 0.8f;
     }
-
 }

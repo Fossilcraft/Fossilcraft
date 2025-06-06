@@ -28,6 +28,7 @@ public class FossilCraftDataGenerator implements DataGeneratorEntrypoint {
 
         @Override
         public void generateItemModels(ItemModelGenerator generator) {
+            // Register the dynamic dinosaur items
             for (Dinosaur dinosaur : DinosaurRegistry.all().values()) {
                 Identifier dnaItemId = Identifier.of(FossilCraftMod.MOD_ID, dinosaur.id + "_dna");
                 Identifier eggItemId = Identifier.of(FossilCraftMod.MOD_ID, dinosaur.id + "_egg");
@@ -38,6 +39,10 @@ public class FossilCraftDataGenerator implements DataGeneratorEntrypoint {
                 generator.register(dnaItem, Models.GENERATED);
                 generator.register(eggItem, Models.GENERATED);
             }
+
+            // Register other mod items
+            Item bioFossilItem = Registries.ITEM.get(Identifier.of(FossilCraftMod.MOD_ID, "bio_fossil"));
+            generator.register(bioFossilItem, Models.GENERATED);
         }
 
         @Override

@@ -3,33 +3,602 @@
     "minecraft:geometry": [
         {
             "description": {
-                "identifier": "geo.triceratops",
-                "texture_width": 64,
-                "texture_height": 64
+                "identifier": "geometry.unknown",
+                "texture_width": 16,
+                "texture_height": 16,
+                "visible_bounds_width": 2,
+                "visible_bounds_height": 1.5,
+                "visible_bounds_offset": [
+                    0,
+                    0.25,
+                    0
+                ]
             },
             "bones": [
                 {
-                    "name": "body",
+                    "name": "LowerBody",
                     "pivot": [
                         0,
-                        24,
-                        0
+                        1.875,
+                        1.05
                     ],
                     "cubes": [
                         {
                             "origin": [
-                                -4,
-                                0,
-                                -8
+                                -0.875,
+                                1.075,
+                                0.75
                             ],
                             "size": [
-                                8,
-                                8,
-                                16
+                                1.75,
+                                1.62,
+                                1.5
                             ],
-                            "uv": [
+                            "pivot": [
+                                0,
+                                0.925,
+                                1.75
+                            ],
+                            "rotation": [
+                                -5,
                                 0,
                                 0
+                            ],
+                            "uv": [
+                                3,
+                                1
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "LowerLegs",
+                    "parent": "LowerBody",
+                    "pivot": [
+                        0,
+                        1.5,
+                        1.875
+                    ]
+                },
+                {
+                    "name": "BackUpperLeg_R",
+                    "parent": "LowerLegs",
+                    "pivot": [
+                        -0.875,
+                        1.5,
+                        1.875
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -1.2,
+                                0.875,
+                                1.375
+                            ],
+                            "size": [
+                                0.475,
+                                1.25,
+                                1.05
+                            ],
+                            "pivot": [
+                                -0.9625,
+                                1.5,
+                                1.85
+                            ],
+                            "rotation": [
+                                10,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                6,
+                                3
+                            ],
+                            "mirror": true
+                        },
+                        {
+                            "origin": [
+                                -1.12,
+                                0,
+                                1.67
+                            ],
+                            "size": [
+                                0.4,
+                                0.9,
+                                0.645
+                            ],
+                            "uv": [
+                                7,
+                                5
+                            ],
+                            "mirror": true
+                        }
+                    ]
+                },
+                {
+                    "name": "BackUpperLeg_L",
+                    "parent": "LowerLegs",
+                    "pivot": [
+                        0.875,
+                        1.5,
+                        1.875
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                0.725,
+                                0.875,
+                                1.375
+                            ],
+                            "size": [
+                                0.475,
+                                1.25,
+                                1.05
+                            ],
+                            "pivot": [
+                                0.9625,
+                                1.5,
+                                1.85
+                            ],
+                            "rotation": [
+                                10,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                6,
+                                3
+                            ]
+                        },
+                        {
+                            "origin": [
+                                0.72,
+                                0,
+                                1.67
+                            ],
+                            "size": [
+                                0.4,
+                                1.05,
+                                0.645
+                            ],
+                            "uv": [
+                                7,
+                                5
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Tail1",
+                    "parent": "LowerBody",
+                    "pivot": [
+                        0,
+                        1.775,
+                        2.25
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -0.65,
+                                1.09,
+                                2.1
+                            ],
+                            "size": [
+                                1.3,
+                                1.325,
+                                1.15
+                            ],
+                            "pivot": [
+                                0,
+                                1.89,
+                                2.325
+                            ],
+                            "rotation": [
+                                -15,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                6,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Tail2",
+                    "parent": "Tail1",
+                    "pivot": [
+                        0,
+                        1.45,
+                        3.05
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -0.4,
+                                0.965,
+                                3
+                            ],
+                            "size": [
+                                0.8,
+                                1,
+                                1
+                            ],
+                            "pivot": [
+                                0,
+                                1.5,
+                                3
+                            ],
+                            "rotation": [
+                                -17.5,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                8,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Tail3",
+                    "parent": "Tail2",
+                    "pivot": [
+                        0,
+                        1.225,
+                        3.85
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -0.21,
+                                0.87,
+                                3.8
+                            ],
+                            "size": [
+                                0.42,
+                                0.64,
+                                1
+                            ],
+                            "pivot": [
+                                0,
+                                1.2,
+                                3.975
+                            ],
+                            "rotation": [
+                                -8.25,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                8,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "UpperBody",
+                    "parent": "LowerBody",
+                    "pivot": [
+                        0,
+                        1.9,
+                        1.05
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -1.05,
+                                1,
+                                -0.65
+                            ],
+                            "size": [
+                                2.1,
+                                1.9,
+                                1.75
+                            ],
+                            "uv": [
+                                3,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "UpperLegs",
+                    "parent": "UpperBody",
+                    "pivot": [
+                        0,
+                        1.425,
+                        -0.075
+                    ]
+                },
+                {
+                    "name": "FrontUpperLeg_R",
+                    "parent": "UpperLegs",
+                    "pivot": [
+                        -1.05,
+                        1.425,
+                        -0.075
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -1.5,
+                                0.7,
+                                -0.4
+                            ],
+                            "size": [
+                                0.5,
+                                1.1,
+                                0.675
+                            ],
+                            "uv": [
+                                6,
+                                4
+                            ],
+                            "mirror": true
+                        },
+                        {
+                            "origin": [
+                                -1.45,
+                                0,
+                                -0.22
+                            ],
+                            "size": [
+                                0.43,
+                                0.89,
+                                0.58
+                            ],
+                            "uv": [
+                                4,
+                                2
+                            ],
+                            "mirror": true
+                        }
+                    ]
+                },
+                {
+                    "name": "FrontUpperLeg_L",
+                    "parent": "UpperLegs",
+                    "pivot": [
+                        1.05,
+                        1.425,
+                        -0.075
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                1,
+                                0.7,
+                                -0.4
+                            ],
+                            "size": [
+                                0.5,
+                                1.1,
+                                0.675
+                            ],
+                            "uv": [
+                                6,
+                                4
+                            ]
+                        },
+                        {
+                            "origin": [
+                                1.02,
+                                0,
+                                -0.22
+                            ],
+                            "size": [
+                                0.43,
+                                0.89,
+                                0.58
+                            ],
+                            "uv": [
+                                4,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Neck",
+                    "parent": "UpperBody",
+                    "pivot": [
+                        0,
+                        2.35,
+                        -0.65
+                    ]
+                },
+                {
+                    "name": "Head",
+                    "parent": "Neck",
+                    "pivot": [
+                        0,
+                        2.275,
+                        -0.675
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -0.575,
+                                1.725,
+                                -1.85
+                            ],
+                            "size": [
+                                1.15,
+                                1.275,
+                                1.225
+                            ],
+                            "uv": [
+                                2,
+                                1
+                            ]
+                        },
+                        {
+                            "origin": [
+                                -0.35,
+                                1.825,
+                                -2.275
+                            ],
+                            "size": [
+                                0.7,
+                                0.675,
+                                0.75
+                            ],
+                            "pivot": [
+                                0,
+                                2.175,
+                                -1.9
+                            ],
+                            "rotation": [
+                                34,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                5,
+                                3
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Frill",
+                    "parent": "Head",
+                    "pivot": [
+                        0,
+                        2.5,
+                        -0.7
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -1.25,
+                                2.225,
+                                -0.65
+                            ],
+                            "size": [
+                                2.5,
+                                2.225,
+                                0.35
+                            ],
+                            "pivot": [
+                                0,
+                                3,
+                                -0.4
+                            ],
+                            "rotation": [
+                                -18,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                3,
+                                2
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "UpperHorns",
+                    "parent": "Head",
+                    "pivot": [
+                        0,
+                        3,
+                        -0.625
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -0.675,
+                                2.975,
+                                -0.75
+                            ],
+                            "size": [
+                                0.3,
+                                1.65,
+                                0.325
+                            ],
+                            "pivot": [
+                                -0.6,
+                                2.975,
+                                -0.675
+                            ],
+                            "rotation": [
+                                60.25,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                7,
+                                4
+                            ],
+                            "mirror": true
+                        },
+                        {
+                            "origin": [
+                                0.375,
+                                2.975,
+                                -0.75
+                            ],
+                            "size": [
+                                0.3,
+                                1.65,
+                                0.325
+                            ],
+                            "pivot": [
+                                0.6,
+                                2.975,
+                                -0.675
+                            ],
+                            "rotation": [
+                                60.25,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                7,
+                                4
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "LowerHorn",
+                    "parent": "Head",
+                    "pivot": [
+                        0,
+                        2.5,
+                        -2.075
+                    ],
+                    "cubes": [
+                        {
+                            "origin": [
+                                -0.18,
+                                2.35,
+                                -2.225
+                            ],
+                            "size": [
+                                0.35,
+                                0.625,
+                                0.35
+                            ],
+                            "pivot": [
+                                0,
+                                2.5,
+                                -1.875
+                            ],
+                            "rotation": [
+                                17.5,
+                                0,
+                                0
+                            ],
+                            "uv": [
+                                6,
+                                3
                             ]
                         }
                     ]
