@@ -1,0 +1,11 @@
+# Gradle
+.gradle/
+build/
+run/
+bin/
+
+.apt_generated/
+src/main/generated/
+
+# OS
+.DS_Store

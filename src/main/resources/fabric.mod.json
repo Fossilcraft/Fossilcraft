@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "fossilcraft",
+	"version": "${version}",
+	"name": "Example mod",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"Me!"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/fossilcraft/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"mod.fossilcraft.FossilCraftMod"
+		],
+		"client": [
+			"mod.fossilcraft.FossilCraftModClient"
+		],
+		"fabric-datagen": [
+			"mod.fossilcraft.FossilCraftDataGenerator"
+		]
+	},
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.5",
+		"java": ">=21",
+		"fabric-api": "*",
+		"geckolib": ">=5.0.1"
+	}
+}
