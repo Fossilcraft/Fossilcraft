@@ -1,4 +1,4 @@
-name: Build & Release
+name: ci
 
 on: 
   push:
@@ -8,6 +8,8 @@ on:
 jobs:
   check-version:
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.check.outputs.version }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -15,11 +17,38 @@ jobs:
           fetch-depth: 2  # Fetch the last two commits to check version changes
 
       - name: Check version
+        id: check
         run: |
           VERSION_LINE=$(git diff HEAD^ HEAD -- gradle.properties | grep '^+[[:space:]]*version=' || true)
+
           if [[ -n "$VERSION_LINE" ]]; then
-            echo "✅ Version changed: $VERSION_LINE"
-          else
-            echo "❌ Version not changed."
-            exit 1
+            VERSION=$(echo "$VERSION_LINE" | sed -E 's/^\+\s*version=//')
+            echo "✅ Version changed to: $VERSION"
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           fi
+
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    needs: check-version
+    if: needs.check-version.outputs.version != ''
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Build with Gradle
+        run: ./gradlew build
+
+      - name: Upload JAR to GitHub 
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: build/libs/fossilcraft-*.jar
+          tag: v${{ needs.check-version.outputs.version }}
+          commit: ${{ github.sha }}
