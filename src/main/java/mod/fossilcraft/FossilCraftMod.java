@@ -4,6 +4,7 @@ import org.slf4j.Logger;
 
 import mod.fossilcraft.data.DinosaurJsonLoader;
 import mod.fossilcraft.registry.DinosaurRegistry;
+import mod.fossilcraft.registry.ModBlockEntities;
 import mod.fossilcraft.registry.ModBlocks;
 import mod.fossilcraft.registry.ModEntities;
 import mod.fossilcraft.registry.ModItems;
@@ -28,6 +29,7 @@ public class FossilCraftMod implements ModInitializer {
 			LOGGER.warn("FossilCraft initialized but no dinosaurs were loaded.");
 		}
 
-		ModBlocks.initialize();
+		ModBlocks.init();
+		ModBlockEntities.init();
 	}
 }

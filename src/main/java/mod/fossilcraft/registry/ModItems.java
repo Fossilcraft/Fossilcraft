@@ -1,5 +1,7 @@
 package mod.fossilcraft.registry;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.function.Function;
 
 import mod.fossilcraft.FossilCraftMod;
@@ -11,6 +13,8 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.util.Identifier;
 
 public final class ModItems {
+
+    public static final Map<RegistryKey<Item>, Item> ALL = new HashMap<>();
 
     public static final Item BIO_FOSSIL = register("bio_fossil");
 
@@ -42,6 +46,10 @@ public final class ModItems {
             settings = new Item.Settings();
         }
 
-        return Items.register(key, factory, settings);
+        Item item = Items.register(key, factory, settings);
+
+        ALL.put(key, item);
+
+        return item;
     }
 }
