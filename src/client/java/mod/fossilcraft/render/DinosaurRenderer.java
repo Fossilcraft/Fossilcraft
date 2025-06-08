@@ -13,6 +13,5 @@ public class DinosaurRenderer<R extends LivingEntityRenderState & GeoRenderState
     public DinosaurRenderer(Context ctx, String dinosaurId) {
         super(ctx, new DinosaurModel(dinosaurId));
         this.shadowRadius = 0.8f;
-        this.withScale(6.0f);
     }
 }

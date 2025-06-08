@@ -22,7 +22,7 @@ public class DinosaurModel extends GeoModel<DinosaurEntity> {
 
     @Override
     public Identifier getTextureResource(GeoRenderState renderState) {
-        return Identifier.of(FossilCraftMod.MOD_ID, "entity/" + dinosaurId);
+        return Identifier.of(FossilCraftMod.MOD_ID, "textures/entity/" + dinosaurId + ".png");
     }
 
     @Override

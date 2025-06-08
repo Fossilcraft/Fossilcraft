@@ -420,7 +420,7 @@
                     ]
                 },
                 {
-                    "name": "Head",
+                    "name": "head",
                     "parent": "Neck",
                     "pivot": [
                         0,
@@ -474,7 +474,7 @@
                 },
                 {
                     "name": "Frill",
-                    "parent": "Head",
+                    "parent": "head",
                     "pivot": [
                         0,
                         11.15,
@@ -511,7 +511,7 @@
                 },
                 {
                     "name": "UpperHorns",
-                    "parent": "Head",
+                    "parent": "head",
                     "pivot": [
                         0,
                         12.05,
@@ -574,7 +574,7 @@
                 },
                 {
                     "name": "LowerHorn",
-                    "parent": "Head",
+                    "parent": "head",
                     "pivot": [
                         0,
                         9.325,

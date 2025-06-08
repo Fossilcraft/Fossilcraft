@@ -7,5 +7,8 @@ bin/
 .apt_generated/
 src/main/generated/
 
+# VSCode
+.vscode/
+
 # OS
 .DS_Store
